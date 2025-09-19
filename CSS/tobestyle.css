@@ -1,0 +1,130 @@
+body
+{
+    background-color: white;
+}
+
+html, body
+{
+    margin: 0;
+    padding: 0;
+}
+
+hr
+{
+    margin: 0;  
+    border: none;
+    height: 2px;
+    background-color: gray;
+}
+
+header
+{
+    display: flex;              
+    align-items: center;        
+    justify-content: space-between;
+    padding: 0 20px;             
+    font-weight: 700;
+    background-color: black;    
+    width: 100%;               
+    height: 50px;               
+    box-sizing: border-box;      
+}
+
+header h2
+{
+    margin: 0;
+    color: white;               
+}
+
+header nav
+{
+    display: flex;              
+    gap: 20px;
+}
+
+header nav a
+{
+    font-family: 'Segoe UI';
+    text-decoration: none;
+    color: white;
+}
+
+main, form, .content
+{
+    margin-top: 30px;
+}
+
+a
+{
+    margin-right: 50px;
+    font-family: 'Segoe UI';
+}
+
+.ads-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 30px;
+}
+
+.ad-box {
+    height: 200px;
+    border-radius: 15px;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ad-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.ad-box h3, .ad-box p {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+}
+
+.ad-box h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.ad-box p {
+    font-size: 16px;
+}
+
+.ad-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+}
+
+
+footer
+{
+    margin-right: 30px;
+    text-align: center;
+    background-color: black;
+    width: 100%;               
+    height: 50px;
+    position: fixed;
+    bottom: 0;     
+    p
+    {
+        text-align: center;
+        color: white;
+    }
+}

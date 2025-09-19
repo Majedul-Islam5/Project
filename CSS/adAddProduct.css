@@ -1,0 +1,191 @@
+body
+{
+    background-color: #e3e6e6 !important;
+}
+
+html, body
+{
+    margin: 0;
+    padding: 0;
+}
+
+hr{
+    margin: 0;  
+    border: none;
+    height: 2px;
+    background-color: gray; 
+}
+
+.main-content
+{
+    flex: 1;
+}
+
+header {
+    display: flex;              
+    align-items: center;        
+    justify-content: space-between;
+    padding: 0 20px;             
+    font-weight: 700;
+    background-color: black;    
+    width: 100%;               
+    height: 50px;               
+    box-sizing: border-box;      
+}
+
+header h2
+{
+    margin: 0;
+    color: white;                
+}
+
+header nav
+{
+    display: flex;              
+    gap: 20px;
+}
+
+header nav a
+{
+    font-family: 'Segoe UI', sans-serif;
+    text-decoration: none;
+    color: white;
+}
+
+header a
+{
+    text-decoration: none;
+    color: white;
+}
+
+a
+{
+    margin-right: 50px;
+    font-family: 'Segoe UI';
+}
+
+h2
+{
+    margin: 15px 0 10px 70px;
+    font-size: 1.6em;
+    color: #121212;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+}
+
+.container
+{
+    width: 20em;           
+    height: 2.5em;
+    position: relative;
+    margin-bottom: 35px;
+}
+
+.form_input
+{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: white;
+    border: 2px solid black;
+    border-radius: 0.5em;
+    outline: none;
+    padding-left: 1em;
+    font-size: 1em;
+}
+
+.form_input:hover
+{
+    border: 2px solid rgba(0, 255, 255, 0.5);
+}
+
+.form_input:focus
+{
+    border: 2px solid #00ffff;
+}
+
+label
+{
+    position: absolute;
+    background: white;
+    color: black;
+    font-family: sans-serif;
+    left: 1em;
+    top: 0.75em;
+    cursor: text;
+    transition: top 350ms ease-in, font-size 350ms ease-in;
+}
+
+.form_input:focus + label,
+.form_input:not(:placeholder-shown) + label {
+    top: -0.6em;
+    font-size: 0.8em;
+    padding: 0 0.25em;
+    color: #00bcd4;
+}
+
+.error {
+    position: absolute;
+    top: 3.8em;
+    left: 0.5em;
+    font-size: 0.75em;
+    color: red;
+}
+
+
+.error2 {
+    position: absolute;
+    top: 5.8em;
+    left: 0.5em;
+    font-size: 0.75em;
+    color: red;
+}
+
+.file-container {
+    height: 3.5em;
+}
+
+.file-input {
+    padding-top: 0.6em;
+}
+
+.form-group {
+    width: 21.31em;
+    margin-left: 1.35em;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: #00bcd4;
+    color: white;
+    font-size: 1em;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #008c9e;
+}
+
+footer{
+    margin-right: 30px;
+    text-align: center;
+    background-color: black;
+    width: 100%;               
+    height: 50px;
+    position: fixed;
+    bottom: 0;     
+    p{
+        text-align: center;
+        color: white;
+    }
+}
