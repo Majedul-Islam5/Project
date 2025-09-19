@@ -16,14 +16,15 @@ if (isset($_GET['delete_id'])) {
     $user = $model->getUserById($user_id);
 
     if ($user) {
-        if ($user['type'] === 'Customer') {
+        if($user['type'] === 'Customer') {
             $model->deleteUser($user_id);
-        } elseif ($user['type'] === 'DeliveryMan') {
-            $model->deleteDeliveryMan($user_id);
+        } 
+        elseif($user['type'] === 'DeliveryMan') {
+            $model->deleteDeliverymanProfile($user_id);
         }
     }
 
-    header("Location: userView.php"); // refresh
+    header("Location: ../../view/Admin/userView.php"); 
     exit();
 }
 

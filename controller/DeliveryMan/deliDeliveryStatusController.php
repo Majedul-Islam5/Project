@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['cancel'])) {
         $order_id = $_POST['cancel'];
 
-        $model->cancelOrder($order_id);
+        $model->cancelOrder($order_id, 'ordered');
 
         header("Location: ../../view/DeliveryMan/deliDeliveryStatus.php");
         exit();

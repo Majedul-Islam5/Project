@@ -38,8 +38,8 @@
                     </tr>
                     <?php foreach ($orders as $order): ?>
                         <tr>
-                            <td><?php echo($order['customer_name']) ?></td>
-                            <td><?php echo($order['customer_address']) ?></td>
+                            <td><?php echo($order['user_name']) ?></td>
+                            <td><?php echo($order['address']) ?></td>
                             <td>BDT <?php echo($order['delivery_fee']) ?></td>
                         </tr>
                     <?php endforeach; ?>

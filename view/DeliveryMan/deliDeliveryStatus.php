@@ -41,8 +41,8 @@
                 <?php foreach ($acceptedOrders as $order): ?>
                     <tr>
                         <form action="deliDeliveryStatus.php" method="POST" enctype="multipart/form-data">
-                            <td><?php echo($order['customer_name']) ?></td>
-                            <td><?php echo($order['customer_address']) ?></td>
+                            <td><?php echo($order['user_name']) ?></td>
+                            <td><?php echo($order['address']) ?></td>
                             <td>
                                 <input type="file" name="product" class="form_input file-input"><br>
                                 <span class="error2">

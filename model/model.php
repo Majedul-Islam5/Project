@@ -23,11 +23,9 @@ class Model {
         $this->conn = $this->OpenCon();
     }
 
-
     //-> funtion for signup to check if user already exists
     public function userExist($firstname) {
-        $sql = "SELECT * FROM user_info WHERE user_name=?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare("SELECT * FROM user_info WHERE user_name=?");
         $stmt->bind_param("s", $firstname);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -51,18 +49,15 @@ class Model {
 
     //-> to change user infromation from edit profile
     public function updateUser($userId, $name, $password, $address, $email, $mobile) {
-        $stmt = $this->conn->prepare(
-            "UPDATE user_info SET user_name = ?, password = ?, address = ?, email = ?, nid = ? WHERE user_id = ?"
-        );
+        $stmt = $this->conn->prepare("UPDATE user_info SET user_name = ?, password = ?, address = ?, email = ?, nid = ? WHERE user_id = ?");
         $stmt->bind_param("sssssi", $name, $password, $address, $email, $mobile, $userId);
         return $stmt->execute();
     }
 
     //-> to delete user infromation from edit profile for customer (using for admin also)
     public function deleteUser($userId) {
-
         $stmt = $this->conn->prepare("UPDATE order_info SET d_id=NULL WHERE c_id=?");
-        $stmt->bind_param("i", $user_id);
+        $stmt->bind_param("i", $userId);
         $stmt->execute();
 
         $stmt = $this->conn->prepare("DELETE FROM customer_order WHERE user_id = ?");
@@ -78,18 +73,15 @@ class Model {
         return $stmt->execute();
     }
 
-
     //-> function to show all products
     public function getAllProducts() {
-        $sql = "SELECT * FROM product";
-        $result = $this->conn->query($sql);
+        $result = $this->conn->query("SELECT * FROM product");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     //-> to load products according to category
     public function getProductsByCategory($category) {
-        $sql = "SELECT * FROM product WHERE category = ?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare("SELECT * FROM product WHERE category = ?");
         $stmt->bind_param("s", $category);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -98,8 +90,7 @@ class Model {
 
     //-> function to get product categories for filter option
     public function getCategories() {
-        $sql = "SELECT DISTINCT category FROM product";
-        $result = $this->conn->query($sql);
+        $result = $this->conn->query("SELECT DISTINCT category FROM product");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -122,12 +113,7 @@ class Model {
 
     //-> to calculate the total price to show 
     public function getCartItems($userId) {
-        $stmt = $this->conn->prepare(
-            "SELECT co.p_id, p.p_name, p.price, p.image_url, p.stock
-             FROM customer_order co
-             JOIN product p ON co.p_id = p.p_id
-             WHERE co.user_id = ?"
-        );
+        $stmt = $this->conn->prepare("SELECT co.p_id, p.p_name, p.price, p.image_url, p.stock FROM customer_order co INNER JOIN product p ON co.p_id = p.p_id WHERE co.user_id = ?");
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -160,9 +146,7 @@ class Model {
         }
 
         //-> insert into order_info table
-        $stmt = $this->conn->prepare(
-            "INSERT INTO order_info (c_id, status, product_cost, delivery_fee) VALUES (?, ?, ?, ?)"
-        );
+        $stmt = $this->conn->prepare("INSERT INTO order_info (c_id, status, product_cost, delivery_fee) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("isdd", $userId, $status, $total, $delivery);
         $stmt->execute();
 
@@ -192,25 +176,8 @@ class Model {
 
     //-> to load customers and deliverymen for admin to delete
     public function getAllUsers() {
-        $sql = "SELECT * FROM user_info WHERE type IN ('Customer','DeliveryMan')";
-        $result = $this->conn->query($sql);
+        $result = $this->conn->query("SELECT * FROM user_info WHERE type IN ('Customer','DeliveryMan')");
         return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    //-> to delete deliveryman for admin
-    public function deleteDeliveryMan($user_id) {
-
-        $stmt = $this->conn->prepare("UPDATE order_info SET d_id=NULL WHERE d_id=?");
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-
-        $stmt = $this->conn->prepare("DELETE FROM order_info WHERE d_id=?");
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-
-        $stmt = $this->conn->prepare("DELETE FROM user_info WHERE user_id=?");
-        $stmt->bind_param("i", $user_id);
-        return $stmt->execute();
     }
 
     //-> to add a new product
@@ -232,13 +199,7 @@ class Model {
     //-> deliveryMan to see income
     public function getDeliverymanOrders($d_id) {
         $status="delivered";
-        $stmt = $this->conn->prepare(
-        "SELECT oi.order_id, oi.c_id, oi.status, oi.product_cost, oi.delivery_fee, oi.order_datetime,
-                u.user_name AS customer_name, u.address AS customer_address, u.nid
-         FROM order_info oi
-         JOIN user_info u ON oi.c_id = u.user_id
-         WHERE oi.d_id = ? AND status=? ORDER BY oi.order_datetime DESC"
-        );
+        $stmt = $this->conn->prepare("SELECT oi.order_id, oi.c_id, oi.status, oi.product_cost, oi.delivery_fee, oi.order_datetime, u.user_name, u.address, u.nid FROM order_info oi INNER JOIN user_info u ON oi.c_id = u.user_id WHERE oi.d_id = ? AND status=? ORDER BY oi.order_datetime DESC");
         $stmt->bind_param("is", $d_id,$status);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -248,13 +209,7 @@ class Model {
     //-> deliveryMan to see accepted orders
     public function getDeliverymanAcceptedOrders($d_id) {
         $status="accepted";
-        $stmt = $this->conn->prepare(
-        "SELECT oi.order_id, oi.c_id, oi.status, oi.product_cost, oi.delivery_fee, oi.order_datetime,
-                u.user_name AS customer_name, u.address AS customer_address, u.nid
-         FROM order_info oi
-         JOIN user_info u ON oi.c_id = u.user_id
-         WHERE oi.d_id = ? AND status=? ORDER BY oi.order_datetime DESC"
-        );
+        $stmt = $this->conn->prepare("SELECT oi.order_id, oi.c_id, oi.status, oi.product_cost, oi.delivery_fee, oi.order_datetime, u.user_name, u.address, u.nid FROM order_info oi INNER JOIN user_info u ON oi.c_id = u.user_id WHERE oi.d_id = ? AND status=? ORDER BY oi.order_datetime DESC");
         $stmt->bind_param("is", $d_id,$status);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -263,16 +218,13 @@ class Model {
 
     //-> to know which orders have no deliveryman
     public function getPendingOrders() {
-        $result = $this->conn->query("SELECT * FROM order_info WHERE d_id IS NULL");
+        $result = $this->conn->query("SELECT * FROM order_info WHERE d_id IS NULL AND status='ordered'");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     //-> to show orders in deliveryDashboard
     public function getPendingOrderDetails() {
-        $sql = "SELECT order_info.order_id, order_info.product_cost, order_info.delivery_fee, user_info.user_name, user_info.address, user_info.nid 
-                FROM user_info 
-                INNER JOIN order_info ON user_info.user_id = order_info.c_id 
-                WHERE order_info.d_id IS NULL";
+        $sql = "SELECT order_info.order_id, order_info.product_cost, order_info.delivery_fee, user_info.user_name, user_info.address, user_info.nid FROM user_info INNER JOIN order_info ON user_info.user_id = order_info.c_id WHERE order_info.d_id IS NULL AND status='ordered'";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -285,9 +237,9 @@ class Model {
         return $stmt->execute();
     }
 
-    //-> delete the deliveryman account
+    //-> delete the deliveryman account(for admin also)
     public function deleteDeliverymanProfile($user_id) {
-        $status = "received";
+        $status = "delivered";
         $statusText = "accepted";
         $stmt = $this->conn->prepare("UPDATE order_info SET d_id=NULL WHERE d_id=? AND status=?");
         $stmt->bind_param("is", $user_id,$status);
@@ -310,14 +262,11 @@ class Model {
     }
 
     //-> deliveryman to cancel a product delivery
-    public function cancelOrder($order_id) {
-    $stmt = $this->conn->prepare("UPDATE order_info SET status='ordered', d_id=NULL WHERE order_id=?");
-    $stmt->bind_param("i", $order_id);
-    return $stmt->execute();
-}
-
-
-
+    public function cancelOrder($order_id,$status) {
+        $stmt = $this->conn->prepare("UPDATE order_info SET status=?, d_id=NULL WHERE order_id=?");
+        $stmt->bind_param("si", $status, $order_id);
+        return $stmt->execute();
+    }
 
 }
 
