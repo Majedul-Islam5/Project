@@ -36,7 +36,7 @@
 
         <div class="container">
             
-            <input type="text" id="name" name="userName" autocomplete="off" placeholder=" " class="form_input">
+            <input type="text" id="name" name="userName" autocomplete="off" placeholder=" " class="form_input" value="<?php echo(isset($_COOKIE['name']))?$_COOKIE['name']:''?>">
             <label for="name"> <strong>Name</strong></label>
             <span id="nameerr"></span>
             <span id="use">
@@ -63,7 +63,7 @@
 
 
         <div class="container">
-            <input type="password" id="password" name="password" autocomplete="off" placeholder=" " class="form_input">
+            <input type="password" id="password" name="password" autocomplete="off" placeholder=" " class="form_input" value="<?php echo(isset($_COOKIE['password']))?$_COOKIE['password']:''?>">
             <label for="password"><strong>Password</strong></label>
             <span id="passworderr"></span>
             <span id="pass">
@@ -86,6 +86,13 @@
                     }
                 ?>
             </span>
+        </div>
+
+         <div class="container">
+            
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember"> <strong>Remember me</strong></label>
+            
         </div>
 
         <div class="form-group">

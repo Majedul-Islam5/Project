@@ -53,6 +53,12 @@
         else
         {
             $_SESSION['userId']=$row[0]['user_id'];
+            if(isset($_POST['remember']))
+            {
+                setcookie("name",$firstname,time()+86400,"/");
+                setcookie("password",$password,time()+86400,"/");
+            }
+            
             if($row[0]['type']=="Customer")
             {
                 header("Location: ../view/Customer/cusDashboard.php");

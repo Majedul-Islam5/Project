@@ -45,7 +45,9 @@ if (isset($_POST['button']) && $_POST['button'] === "order") {
     $model->placeOrder($userId, $total, $delivery);
 
 
-    header("Location: cusDashboard.php");
+    $_SESSION['order_success'] = true;
+
+    header("Location: viewCart.php");
     exit();
 }
 

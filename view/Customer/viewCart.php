@@ -92,6 +92,23 @@
         </div>
     <?php endif; ?>
 
+    <div id="successModal" class="modal">
+    <div class="modal-content">
+        <div class="icon">
+        ✅
+        </div>
+        <h2>Thank You!</h2>
+        <p>Your order has been placed successfully.</p>
+        <button id="okButton">OK</button>
+    </div>
+    </div>
+
+
+    <?php if (isset($_SESSION['order_success'])): ?>
+        <script src="/Project/JS/success.js"></script>
+        <?php unset($_SESSION['order_success']); ?>
+    <?php endif; ?>
+
     <script src="/Project/JS/payment.js"></script>
 
     <footer>
