@@ -21,74 +21,83 @@
     </header>
     <hr>
 
-    <h2>Deliveryman / Edit Profile</h2>
-    <form action="deliProfile.php" method="POST">
-        <label for="name"><strong>Name</strong></label><br>
-        <input type="text" id="name" name="userName" class="form_input" value="<?php echo($userName) ?>">
-        <span class="error">
-                <?php
-                    if (isset($_SESSION['Name'])) 
-                    {
-                        echo $_SESSION['Name'];
-                        unset($_SESSION['Name']);
-                    }
-                ?>
-        </span>
-        <br>
+    <div class="profile-container">
+        <div class="left-panel">
+            <h2>Deliveryman / Edit Profile</h2>
+            <div class="profile-image">
+                <img src="../../Image/<?= $image ?>" alt="Deliveryman Picture">
+            </div>
+        </div>
 
-        <label for="email"><strong>Email</strong></label><br>
-        <input type="email" id="email" name="email" class="form_input" value="<?php echo($email) ?>">
-        <span class="error">
-                <?php
-                    if (isset($_SESSION['Email'])) 
-                    {
-                        echo $_SESSION['Email'];
-                        unset($_SESSION['Email']);
-                    }
-                ?>
-        </span>
-        <br>
+        <div class="profile-form">
+            <form action="deliProfile.php" method="POST">
+                <label for="name"><strong>Name</strong></label><br>
+                <input type="text" id="name" name="userName" class="form_input" value="<?php echo($userName) ?>">
+                <span class="error">
+                        <?php
+                            if (isset($_SESSION['Name'])) 
+                            {
+                                echo $_SESSION['Name'];
+                                unset($_SESSION['Name']);
+                            }
+                        ?>
+                </span>
+                <br>
 
-        <label for="mobile"><strong>Mobile</strong></label><br>
-        <input type="text" id="mobile" name="mobile" class="form_input" value="<?php echo($mobile) ?>">
-        <span class="error">
-                <?php
-                    if (isset($_SESSION['Mobile'])) {
-                        echo $_SESSION['Mobile'];
-                        unset($_SESSION['Mobile']);
-                    }
-                ?>
-        </span>
-        <br>
+                <label for="email"><strong>Email</strong></label><br>
+                <input type="email" id="email" name="email" class="form_input" value="<?php echo($email) ?>">
+                <span class="error">
+                        <?php
+                            if (isset($_SESSION['Email'])) 
+                            {
+                                echo $_SESSION['Email'];
+                                unset($_SESSION['Email']);
+                            }
+                        ?>
+                </span>
+                <br>
 
-        <label for="address"><strong>Address</strong></label><br>
-        <input type="text" id="address" name="address" class="form_input" value="<?php echo($address) ?>">
-        <span class="error">
-                <?php
-                    if (isset($_SESSION['Address'])) {
-                        echo $_SESSION['Address'];
-                        unset($_SESSION['Address']);
-                    }
-                ?>
-        </span>
-        <br>
+                <label for="mobile"><strong>Mobile</strong></label><br>
+                <input type="text" id="mobile" name="mobile" class="form_input" value="<?php echo($mobile) ?>">
+                <span class="error">
+                        <?php
+                            if (isset($_SESSION['Mobile'])) {
+                                echo $_SESSION['Mobile'];
+                                unset($_SESSION['Mobile']);
+                            }
+                        ?>
+                </span>
+                <br>
 
-        <label for="password"><strong>Password</strong></label><br>
-        <input type="text" id="password" name="password" class="form_input" value="<?php echo($password) ?>">
-        <span class="error">
-                <?php
-                    if (isset($_SESSION['Password'])) {
-                        echo $_SESSION['Password'];
-                        unset($_SESSION['Password']);
-                    }
-                ?>
-        </span>
-        <br>
+                <label for="address"><strong>Address</strong></label><br>
+                <input type="text" id="address" name="address" class="form_input" value="<?php echo($address) ?>">
+                <span class="error">
+                        <?php
+                            if (isset($_SESSION['Address'])) {
+                                echo $_SESSION['Address'];
+                                unset($_SESSION['Address']);
+                            }
+                        ?>
+                </span>
+                <br>
 
-        <button type="submit" name="action" value="change">Save Changes</button>
-        <button type="submit" name="action" value="delete">Delete Account</button>
-    </form>
+                <label for="password"><strong>Password</strong></label><br>
+                <input type="text" id="password" name="password" class="form_input" value="<?php echo($password) ?>">
+                <span class="error">
+                        <?php
+                            if (isset($_SESSION['Password'])) {
+                                echo $_SESSION['Password'];
+                                unset($_SESSION['Password']);
+                            }
+                        ?>
+                </span>
+                <br>
 
+                <button type="submit" name="action" value="change">Save Changes</button>
+                <button type="submit" name="action" value="delete">Delete Account</button>
+            </form>
+        </div>
+    </div>
     <footer>
         <hr>
         <p>Copyright &copy; All rights reserved by ALIDADA</p>

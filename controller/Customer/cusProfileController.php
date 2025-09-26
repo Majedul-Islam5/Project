@@ -17,6 +17,7 @@ $email    = $user['email'];
 $mobile   = $user['nid'];
 $address  = $user['address'];
 $password = $user['password'];
+$image = $user['user_image'];
 
 function test_input($data) 
 {

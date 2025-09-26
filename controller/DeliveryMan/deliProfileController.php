@@ -10,13 +10,14 @@ if (!isset($_SESSION['userId'])) {
 $model = new Model();
 $userId = $_SESSION['userId'];
 
-$userData = $model->getUserById($userId);
+$user = $model->getUserById($userId);
 
-$userName = $userData['user_name'] ;
-$email    = $userData['email'] ;
-$mobile   = $userData['nid'] ;
-$address  = $userData['address'] ;
-$password = $userData['password'] ;
+$userName = $user['user_name'] ;
+$email    = $user['email'] ;
+$mobile   = $user['nid'] ;
+$address  = $user['address'] ;
+$password = $user['password'] ;
+$image = $user['user_image'];
 
 function test_input($data) {
     $data = trim($data);
