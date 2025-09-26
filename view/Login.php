@@ -91,7 +91,7 @@
          <div class="container">
             
             <input type="checkbox" id="remember" name="remember">
-            <label for="remember"> <strong>Remember me</strong></label>
+            <strong>Remember me</strong>
             
         </div>
 
